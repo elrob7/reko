@@ -1,0 +1,668 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="icon" href="images/favicon.svg" type="image/svg+xml" sizes="any">
+		<title> r e k o</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		 <div id="fb-root"></div>
+  		
+
+<style>
+	 * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .description {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .table-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+       |
+        
+        th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #ecf0f1;
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        td {
+            padding: 15px 20px;
+        }
+        
+        .nombre {
+            font-weight: 300;
+            color: #2c3e50;
+        }
+        
+        .enlace a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.2s;
+			font-weight: 300;
+        }
+        
+        .enlace a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .descripcion {
+            color: #7f8c8d;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .badge-herramientas {
+            background-color: #e8f4fd;
+            color: #3498db;
+        }
+        
+        .badge-panel {
+            background-color: #e8f6f3;
+            color: #27ae60;
+        }
+        
+        .badge-wordpress {
+            background-color: #fef9e7;
+            color: #f39c12;
+        }
+        
+        @media (max-width: 768px) {
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 600px;
+            }
+            
+            th, td {
+                padding: 12px 15px;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+  :root{
+    --gap: 18px;
+    --card-radius: 12px;
+    --bg: #f6f7f8;
+  }
+
+  body{
+    margin:0;
+    font-family: Inter, system-ui, Arial, sans-serif;
+    background: var(--bg);
+    color:#222;
+    padding:28px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+  }
+
+  .gallery{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--gap);
+  }
+
+  .card{
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height: 0;
+    padding-bottom: 70%; /* forma más horizontal */
+    position: relative;
+    cursor: pointer;
+    background: #fff;
+    transition: transform .18s ease;
+  }
+
+  .card:hover{ transform: scale(1.03); }
+
+  .card .inner{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    border-radius: var(--card-radius);
+  }
+
+  .card img{
+    display:block;
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* Responsive: menos columnas en pantallas pequeñas */
+  @media (max-width:1100px){ .gallery{ grid-template-columns: repeat(5,1fr);} }
+  @media (max-width:900px){ .gallery{ grid-template-columns: repeat(4,1fr);} }
+  @media (max-width:700px){ .gallery{ grid-template-columns: repeat(3,1fr);} }
+  @media (max-width:420px){ .gallery{ grid-template-columns: repeat(2,1fr);} }
+
+  /* Modal */
+  .modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+ 
+  }
+
+  .modal.open{ display:flex; }
+
+  /* 🔸 Caja del modal SIN marco ni sombra */
+  .modal .box{
+    max-width: 95vw;
+    max-height: 95vh;
+    background: transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+	 border: none;
+  box-shadow: none;
+  outline: none;
+  }
+
+  /* 🔸 Imagen sin borde ni sombra */
+  .modal img{
+    max-width: 600px;
+    max-height: 600px;
+	 border: none;
+  box-shadow: none;
+  outline: none;
+   border: none;
+  box-shadow: none;
+  outline: none;
+    
+  }
+
+ /* 🔸 Botón de cerrar ultraminimalista */
+.modal .close {
+  position: absolute;
+  top: 16px;
+  right: 22px;
+  background: none;           /* sin fondo */
+ border: none;
+  box-shadow: none;
+  outline: none;
+  font-size: 10px;
+ 
+}
+
+
+
+  .card:focus { outline: 3px solid rgba(0,123,255,0.2); outline-offset: 4px; }
+</style>
+
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="#"><img src="images/logo.svg" width="100px"></a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="#w">Web & software</a></li>
+								<li><a href="#i">Diseño digital</a></li>
+								<li><a href="#d">Diseño gráfico</a></li>
+							</ul>
+						</nav>
+						
+					</header>
+
+				<!-- Menu -->
+				
+
+				<!-- Main -->
+					<div id="main">
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title" id="w">
+										<h2><a href="single.html">Web | software</a></h2>
+										<p>Desarrollo de páginas web y software web personalizado</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">Herramientas</time>
+										<p  class="author"><span class="name"></span><img src="images/html.png" alt="" />
+										<span class="name"></span><img src="images/js.png" alt="" />
+										<span class="name"></span><img src="images/php.png" alt="" />
+										
+									
+								<span class="name"></span><img src="images/css.png" alt="" /></p>
+									</div>
+								</header>
+								<a href="single.html" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+								
+									<table>
+               
+                <tbody>
+					<tr>
+						<td style="text-align: center; vertical-align: middle;">
+    <img src="images/paal.svg" style="display: block; margin: 0 auto; width: 60px;">
+</td>
+                        <td class="nombre">Paal MX</td>
+                        <td class="enlace"><a href="https://paal-mx.com" target="_blank">paal-mx.com</a></td>
+                        <td class="descripcion">
+                            <span class="badge badge-panel">Boostrap+PHP</span>
+                            <span class="badge badge-herramientas">Sistema administración de pacientes pedíatricos</span>
+                        </td>
+                    </tr>
+                    <tr>
+						<td style="text-align: center; vertical-align: middle;">
+    <img src="images/tecedu.png" style="display: block; margin: 0 auto; width: 60px;">
+</td>
+                        <td class="nombre">TecEdu</td>
+                        <td class="enlace"><a href="https://tecedu.icu" target="_blank">tecedu.icu</a></td>
+                        <td class="descripcion">
+                            <span class="badge badge-wordpress">Moodle</span>
+                            <span class="badge badge-herramientas">Sistema de cursos académicos</span>
+                        </td>
+                    </tr>
+                    <tr><td style="text-align: center; vertical-align: middle;">
+							CALMECATL
+						</td>
+                        <td class="nombre">Calmecatl</td>
+                        <td class="enlace"><a href="https://calmecatl.com.mx" target="_blank">calmecatl.com.mx</a></td>
+                        <td class="descripcion">
+                              <span class="badge badge-wordpress">Moodle</span>
+                            <span class="badge badge-herramientas">Sistema de cursos médicos</span>
+							
+                        </td>
+                    </tr>
+                    <tr>
+						<td style="text-align: center; vertical-align: middle;">
+    <img src="images/losninger.png" style="display: block; margin: 0 auto; width: 80px;">
+</td>
+                        <td class="nombre">Losninger</td>
+                        <td class="enlace"><a href="https://losninger.net" target="_blank">losninger.net</a></td>
+                        <td class="descripcion">
+							  <span class="badge badge-wordpress">Moodle</span>
+							<span class="badge badge-panel">Boostrap</span>
+                            <span class="badge badge-herramientas">Sistema de certificaciones</span>
+                        </td>
+                    </tr>
+                    <tr>
+						<td style="text-align: center; vertical-align: middle;">
+    <img src="images/ucrim.png" style="display: block; margin: 0 auto; width: 60px;">
+</td>
+                        <td class="nombre">UCRIM</td>
+                        <td class="enlace"><a href="https://ucrim.com" target="_blank">ucrim.com</a></td>
+                        <td class="descripcion">
+                             <span class="badge badge-wordpress">WordPress</span>
+                            <span class="badge badge-herramientas">Revista electrónica académica</span>
+                        </td>
+                    </tr>
+                    <tr>
+						<td style="text-align: center; vertical-align: middle;">
+							<img src="images/mmparts.png" style="display: block; margin: 0 auto; width: 60px;">
+						</td>
+                        <td class="nombre">MMParts</td>
+                        <td class="enlace"><a href="https://mmparts.com.mx" target="_blank">mmparts.com.mx</a></td>
+                        <td class="descripcion">
+                            <span class="badge badge-wordpress">WordPress</span>
+                            <span class="badge badge-herramientas">Sistema de venta de autopartes</span>
+                        </td>
+                    </tr>
+					<tr>
+						<td style="text-align: center; vertical-align: middle;">
+							<img src="images/ia.jpg" style="display: block; margin: 0 auto; width: 60px;">
+						</td>
+						<td class="nombre">
+							Detector de uso de IA
+						</td>
+						
+                        
+                        <td class="enlace"><a href="https://elrob7.github.io/pla/" target="_blank">IA detector</a></td>
+                        <td class="descripcion">
+                            <span class="badge badge-wordpress">HTML</span>
+                            <span class="badge badge-herramientas">Sistema detector de uso  IA en documentos</span>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+								<footer>
+									
+								</footer>
+</article>
+
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title" id="i">
+										<h2><a href="single.html">Diseño digital</a></h2>
+										<p>Ilustraciones orientadas al diseño conceptual</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">Herramientas</time>
+										<p  class="author"><span class="name"></span><img src="images/ai.png" alt="" />
+										<span class="name"></span><img src="images/ps.png" alt="" /></p>
+									</div>
+								</header>
+								
+  <div id="projects-container" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;"></div>
+								
+								<footer>
+										<ul class="actions">
+										<li><a href="https://www.behance.net/reko7" class="button large" target="_blank">Ver todos</a></li>
+									</ul>
+									
+								</footer>
+							</article>
+
+						<!-- Post -->
+							<article class="post" id="d">
+								<header>
+									<div class="title">
+										<h2><a href="single.html">Diseño gráfico</a></h2>
+										<p>Diseño de logotipos, carteles etc.</p>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2015-11-01">Herramientas</time>
+										<p  class="author"><span class="name"></span><img src="images/ai.png" alt="" />
+											
+										<span class="name"></span><img src="images/ps.png" alt="" /></p>
+									</div>
+								</header>
+								
+								<p>
+<div class="wrap">
+    
+    <div id="gallery" class="gallery" aria-live="polite"></div>
+
+	<button id="loadMoreBtn" style="margin-top:20px; padding:10px 20px; cursor:pointer;">
+    Cargar más
+  </button>
+  </div>
+
+<!--modal-->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
+    <div class="box" role="document">
+      <button id="closeBtn" class="close" aria-label="Cerrar">✕</button>
+      <img id="modalImg" alt="Imagen ampliada" />
+    </div>
+  </div>
+
+								
+								</p>
+								<footer>
+									
+								</footer>
+							</article>
+
+						
+						
+			</div>
+
+
+				<!-- Sidebar -->
+					<section id="sidebar">
+
+						<!-- Intro -->
+							<section id="intro">
+								<img src="images/logo2.svg" alt="" style="width: 110px; display: block; margin: 0 auto;" />
+								<header>
+									<h3>r e k o </h3></br>
+									<p>Web . diseño . software . arte</p>
+								</header>
+							</section>
+
+						
+						<!-- About -->
+							<section class="blurb">
+								<h2>Yo</h2>
+								<p>robert, desarrollador web y de software con experiencia en crear soluciones funcionales y bien diseñadas.
+También tengo formación en diseño gráfico e ilustración, lo que me ayuda a integrar estética y usabilidad en cada proyecto.
+									</p>
+								
+							</section>
+
+						<!-- Footer -->
+							<section id="footer">
+								<ul class="icons">
+									<li><a href="https://www.linkedin.com/in/roberto-plascencia-jiménez-304987103" class="icon brands fa-linkedin" target="_blank"><span class="label">Instagram</span></a></li>
+									<li><a href="https://www.behance.net/reko7" class="icon brands fa-behance" target="_blank"><span class="label">Instagram</span></a></li>
+									<li><a href="https://www.facebook.com/rekodiseno" class="icon brands fa-facebook-f" target="_blank"><span class="label">Facebook</span></a></li>
+									<li><a href="https://www.instagram.com/rekoomx/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
+									
+								</ul>
+								<p class="copyright">&copy; r e k o</p>
+							</section>
+
+					</section>
+
+			</div>
+
+			
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+<script>
+const username = "reko7"; // 🔹 tu usuario Behance
+const rssUrl = `https://www.behance.net/feeds/user?username=${username}`;
+const apiUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(rssUrl)}`;
+
+fetch(apiUrl)
+  .then(res => res.text())
+  .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+  .then(data => {
+    const items = data.querySelectorAll("item");
+    const container = document.getElementById("projects-container");
+    items.forEach(el => {
+      const title = el.querySelector("title").textContent;
+      const link = el.querySelector("link").textContent;
+      const description = el.querySelector("description").textContent;
+      // 🔍 extraemos el primer <img src="...">
+      const imgMatch = description.match(/<img[^>]+src=['"]([^'"]+)['"]/);
+      const imgUrl = imgMatch ? imgMatch[1] : "https://via.placeholder.com/220";
+
+      const div = document.createElement("div");
+      div.style.width = "120px";
+      div.style.textAlign = "center";
+      div.style.margin = "10px";
+      div.innerHTML = `
+        <a href="${link}" target="_blank" style="text-decoration:none;color:inherit;">
+          <img src="${imgUrl}" alt="${title}" style="width:100%;border-radius:8px;">
+          <p>${title}</p>
+        </a>
+      `;
+      container.appendChild(div);
+    });
+  })
+  .catch(err => console.error("Error al cargar proyectos Behance:", err));
+</script>
+
+
+<script>
+  // Lista de imágenes (usa tus nombres reales)
+  const files = [
+    "44galeria.jpg", "achtli.jpg", "agro.jpg", "agroindustrial.jpg", "aj.jpg", "alchile.jpg",
+    "ar.jpg", "AT.jpg", "banana.jpg", "berry.jpg", "blife.jpg", "bp.jpg",
+    "brecha.jpg", "Báaxal muk_Logo.jpg", "canis.jpg", "Captura.JPG", "cartel.jpg", "cartelfiht.jpg",
+    "cartelfiht2.jpg", "cdp.jpg", "chireal.jpg", "ciber.jpg", "cinduccion.jpg", "cipres.jpg",
+    "cojolites.jpg", "cree-cimiento.jpg", "cs.jpg", "cualtosoidos.jpg", "datori.jpg", "delphalaris.jpg",
+    "desarrollo.jpg", "dima H.jpg", "edumente.jpg", "eyb.jpg", "fca.jpg", "fih2014.jpg",
+    "frutikekis.jpg", "gotadevida.jpg", "gt.jpg", "huevolandia.jpg", "Hygiene.jpg", "isabeia.jpg",
+    "jacaranda.jpg", "jalisconatura.jpg", "jaz.jpg", "jornadas.jpg", "juntos.jpg", "laverde.jpg",
+    "libro.jpg", "life.jpg", "lionking.jpg", "michia.jpg", "netstar.jpg", "pegom.jpg",
+    "raymundos.jpg", "realcan.jpg", "recrea.jpg", "rs.jpg", "samuel.jpg", "siembraunlibro.jpg",
+    "sitiomedico.jpg", "spiot.jpg", "sta.jpg", "suculentos.jpg", "tacotopo.jpg", "thechnology.jpg",
+    "turko.jpg", "unimed.jpg", "ventanacualtos.jpg", "vrpark.jpg", "x.jpg", "x2.jpg",
+    "x3.jpg", "yala.jpg"
+  ];
+
+  const imagesPerPage = 18;
+  let currentPage = 0;
+
+  const gallery = document.getElementById('gallery');
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const closeBtn = document.getElementById('closeBtn');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+  function fileUrl(name){
+    // Cambia esta ruta a la carpeta real donde tengas las imágenes
+    return encodeURI('/images/galeria/' + name);
+  }
+
+  function loadGalleryPage(page) {
+    const start = page * imagesPerPage;
+    const end = start + imagesPerPage;
+    const pageFiles = files.slice(start, end);
+
+    pageFiles.forEach((filename, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.tabIndex = 0;
+      card.setAttribute('role','button');
+      card.setAttribute('aria-label', 'Abrir imagen ' + (start + idx + 1));
+
+      const inner = document.createElement('div');
+      inner.className = 'inner';
+
+      const img = document.createElement('img');
+      img.src = fileUrl(filename);
+      img.alt = '';
+      img.loading = 'lazy';
+
+      const open = () => {
+        modalImg.src = fileUrl(filename);
+        modal.setAttribute('aria-hidden','false');
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      };
+
+      card.addEventListener('click', open);
+      card.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+
+      inner.appendChild(img);
+      card.appendChild(inner);
+      gallery.appendChild(card);
+    });
+
+    if (end >= files.length) {
+      loadMoreBtn.style.display = 'none';
+    }
+  }
+
+  loadMoreBtn.addEventListener('click', () => {
+    currentPage++;
+    loadGalleryPage(currentPage);
+  });
+
+  // Carga inicial
+  loadGalleryPage(currentPage);
+
+  // Cierre modal
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    modalImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+</script>
+
+
+
+	</body>
+</html>
