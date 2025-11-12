@@ -843,7 +843,106 @@ fetch(apiUrl)
   });
 </script>
 
+<script>
+(function(){
+  // helpers
+  function getScrollbarWidth(){ return window.innerWidth - document.documentElement.clientWidth; }
+  function lockBodyScroll(){
+    const sw = getScrollbarWidth();
+    document.body.style.overflow = 'hidden';
+    if (sw > 0) document.body.style.paddingRight = sw + 'px';
+    document.documentElement.classList.add('menu-open');
+  }
+  function unlockBodyScroll(){
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.documentElement.classList.remove('menu-open');
+  }
 
+  const header = document.getElementById('header');
+  const nav = header ? header.querySelector('.links') : null;
+  if (!header || !nav) return;
+
+  let toggleBtn = null;
+
+
+  function removeToggleIfExists(){
+    if (!toggleBtn) return;
+    toggleBtn.removeEventListener('click', toggleNav);
+    if (toggleBtn.parentNode) toggleBtn.parentNode.removeChild(toggleBtn);
+    toggleBtn = null;
+  }
+
+  function toggleNav(e){
+    e.stopPropagation();
+    const isMobile = window.innerWidth <= 900;
+    const opening = !nav.classList.contains('open');
+
+    nav.classList.toggle('open', opening);
+    if (toggleBtn) toggleBtn.classList.toggle('open', opening);
+    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', opening ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', opening ? 'false' : 'true');
+
+    // Solo aplicar maxHeight en mobile — y limpiarlo en desktop
+    if (isMobile) {
+      // forzar cálculo y transición segura:
+      nav.style.maxHeight = opening ? nav.scrollHeight + 'px' : '0';
+    } else {
+      nav.style.maxHeight = '';
+    }
+
+    if (opening) lockBodyScroll(); else unlockBodyScroll();
+  }
+
+  // cerrar al click fuera
+  document.addEventListener('click', function(e){
+    if (!nav.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target) && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      if (toggleBtn) toggleBtn.classList.remove('open');
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded','false');
+      nav.setAttribute('aria-hidden','true');
+      // limpiar inline style (por si)
+      nav.style.maxHeight = '';
+      unlockBodyScroll();
+    }
+  });
+
+  // cerrar con escape
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      if (toggleBtn) { toggleBtn.classList.remove('open'); toggleBtn.setAttribute('aria-expanded','false'); toggleBtn.focus(); }
+      nav.setAttribute('aria-hidden','true');
+      nav.style.maxHeight = '';
+      unlockBodyScroll();
+    }
+  });
+
+  // show/hide toggle según ancho, y forzar cierre al pasar a desktop
+  function handleResize(){
+    if (window.innerWidth <= 900) {
+      createToggleIfNeeded();
+      // asegurar que nav no tenga comportamiento de desktop oculto
+      nav.setAttribute('aria-hidden', nav.classList.contains('open') ? 'false' : 'true');
+    } else {
+      // cerrar si abierto y limpiar estilos inline para evitar que afecte layout
+      if (nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        if (toggleBtn) toggleBtn.classList.remove('open');
+        unlockBodyScroll();
+      }
+      // eliminar cualquier max-height inline que pudiera quedar
+      nav.style.maxHeight = '';
+      nav.setAttribute('aria-hidden','false');
+      removeToggleIfExists();
+    }
+  }
+
+  // inicial
+  handleResize();
+  window.addEventListener('resize', handleResize);
+})();
+</script>
 
 
 
