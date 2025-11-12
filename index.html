@@ -10,6 +10,108 @@
   		
 
 <style>
+
+  /* Evita salto por scrollbar */
+html { overflow-y: scroll; }
+
+/* Asegura que el header no cambie en desktop */
+#header {
+  box-sizing: border-box;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  min-height: 64px; /* evita cambios de alto al aparecer el botón */
+}
+
+/* hamburger: por defecto oculto (no toca layout en desktop) */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* líneas de la hamburguesa */
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #222;
+  position: relative;
+  transition: transform .22s ease, opacity .22s ease;
+}
+.hamburger::before { content: ''; position: absolute; left: 0; top: -7px; width: 22px; height: 2px; }
+.hamburger::after  { content: ''; position: absolute; left: 0; top: 7px; width: 22px; height: 2px; }
+
+/* estilos cuando está abierto (clase .open en el botón) */
+.nav-toggle.open .hamburger { background: transparent; }
+.nav-toggle.open .hamburger::before { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open .hamburger::after  { transform: translateY(-7px) rotate(-45deg); }
+
+/* --- Solo en pantallas pequeñas: mostrar hamburger y hacer nav absoluto --- */
+@media (max-width: 900px) {
+  .nav-toggle { display: inline-flex; position: relative; z-index: 1100; }
+
+  /* mantenemos header sin cambios, sólo convertimos el nav en panel absoluto */
+  #header { padding: 12px 14px; }
+
+  /* nav fuera del flujo, justo debajo del header */
+  .links {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: white;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .32s cubic-bezier(.2,.9,.2,1), box-shadow .2s;
+    box-shadow: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    z-index: 1050;
+  }
+
+  /* clase que abre el panel (añadida por JS) */
+  .links.open { max-height: 520px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+
+  .links ul { display: block; padding: 12px 16px; margin:0; }
+  .links li { margin: 0; padding: 8px 0; border-bottom: 1px solid #f0f0f0; list-style:none; }
+  .links li:last-child { border-bottom: none; }
+  .links a { display: block; padding: 10px 6px; }
+}
+
+  /* asegura ancho y posición consistente */
+#header {
+  box-sizing: border-box;
+  width: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  /* si no quieres que sea fixed, comentarlo */
+  /* position: fixed; top: 0; z-index: 1100; */
+  /* mantiene mínimo alto para que no colapse */
+  min-height: 64px;
+}
+
+/* evitar transform/translate indeseados en el header */
+#header, #header * {
+  transform: none !important;
+}
+
+/* desactiva cualquier margin colateral inesperado agregado al abrir menú */
+body.menu-open, html.menu-open {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
 	 * {
             box-sizing: border-box;
             margin: 0;
@@ -45,39 +147,119 @@
         }
         
         .table-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-       |
-        
-        th {
-            padding: 15px 20px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        
-        tbody tr {
-            border-bottom: 1px solid #ecf0f1;
-            transition: background-color 0.2s;
-        }
-        
-        tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-        
-        td {
-            padding: 15px 20px;
-        }
+  width: 100%;
+  overflow-x: auto; /* permite scroll horizontal si hace falta */
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* evitar forzar anchos rígidos */
+  font-family: inherit;
+}
+
+th {
+  padding: 15px 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ecf0f1;
+  transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+td {
+  padding: 15px 20px;
+  vertical-align: middle;
+  word-break: break-word; /* evita desbordes largos */
+}
+
+/* Badges / elementos internos */
+td .badge {
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 4px;
+  padding: 6px 8px;
+  font-size: 0.65rem;
+  border-radius: 6px;
+  background: #eef2f6;
+}
+
+/* imágenes dentro de celdas: responsivas */
+td img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* enlaces: que no rompan diseño */
+td a {
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* --- Comportamiento responsivo: a partir de aquí se transforma en "cards" --- */
+@media (max-width: 768px) {
+
+  /* esconder cabeceras si las tienes en thead (opcional) */
+  thead { display: none; }
+
+  /* convertir cada fila en bloque */
+  tbody tr {
+    display: block;
+    margin: 0 0 12px 0;
+    padding: 12px;
+    border: 1px solid #eceff1;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  /* cada celda ocupa toda la fila y se muestra como fila flex para alinear label+valor */
+  tbody td {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 10px;
+  }
+
+  /* label generado por CSS (columna) */
+  tbody td::before {
+    content: attr(data-label); /* por defecto intentamos usar data-label si existiera */
+    flex: 0 0 110px; /* ancho de la "etiqueta" */
+    font-weight: 600;
+    padding-right: 10px;
+    opacity: 0.9;
+    text-transform: none;
+  }
+
+  /* si no quieres modificar HTML para añadir data-label, usa nth-child para fijar etiquetas */
+  tbody tr td:nth-child(1)::before { content: "Logo"; }
+  tbody tr td:nth-child(2)::before { content: "Nombre"; }
+  tbody tr td:nth-child(3)::before { content: "Enlace"; }
+  tbody tr td:nth-child(4)::before { content: "Descripción"; }
+
+  /* hacer que la celda de imagen sea más estrecha */
+  tbody tr td:nth-child(1) { padding: 8px 6px; flex: 0 0 80px; justify-content: center; }
+  tbody tr td:nth-child(1) img { width: 60px; }
+
+  /* permitir que la "descripción" ocupe el resto del espacio */
+  tbody tr td:nth-child(4) { flex: 1 1 auto; }
+
+  /* ajustar padding y tamaño de texto para mobile */
+  th, td { padding: 10px 12px; font-size: 0.95rem; }
+
+  /* enlaces ocupen varias líneas sin romper el contenedor */
+  td a { white-space: normal; }
+}
         
         .nombre {
             font-weight: 300;
@@ -125,19 +307,7 @@
             color: #f39c12;
         }
         
-        @media (max-width: 768px) {
-            .table-container {
-                overflow-x: auto;
-            }
-            
-            table {
-                min-width: 600px;
-            }
-            
-            th, td {
-                padding: 12px 15px;
-            }
-        }
+       
         
         footer {
             text-align: center;
@@ -281,17 +451,16 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-					<header id="header">
-						<h1><a href="#"><img src="images/logo.svg" width="100px"></a></h1>
-						<nav class="links">
-							<ul>
-								<li><a href="#w">Web & software</a></li>
-								<li><a href="#i">Diseño digital</a></li>
-								<li><a href="#d">Diseño gráfico</a></li>
-							</ul>
-						</nav>
-						
-					</header>
+<header id="header">
+  <h1><a href="#"><img src="images/logo.svg" width="100px"></a></h1>
+  <nav class="links">
+    <ul>
+      <li><a href="#w">Web & software</a></li>
+      <li><a href="#i">Diseño digital</a></li>
+      <li><a href="#d">Diseño gráfico</a></li>
+    </ul>
+  </nav>
+</header>
 
 				<!-- Menu -->
 				
@@ -316,7 +485,7 @@
 									</div>
 								</header>
 								<a href="single.html" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-								
+								<div class="table-container">
 									<table>
                
                 <tbody>
@@ -343,7 +512,7 @@
                         </td>
                     </tr>
                     <tr><td style="text-align: center; vertical-align: middle;">
-							CALMECATL
+							<h6>CALMECATL</h6>
 						</td>
                         <td class="nombre">Calmecatl</td>
                         <td class="enlace"><a href="https://calmecatl.com.mx" target="_blank">calmecatl.com.mx</a></td>
@@ -405,6 +574,7 @@
                     
                 </tbody>
             </table>
+            </div>
 
 								<footer>
 									
@@ -675,10 +845,11 @@ fetch(apiUrl)
 
 
 
+
+
 	</body>
 
 </html>
-
 
 
 
