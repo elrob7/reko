@@ -10,6 +10,216 @@
   		
 
 <style>
+
+  /* --- Scroll suave y llegada visual --- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Aire arriba de cada sección al aterrizar */
+#i, #w, #d {
+  scroll-margin-top: 30px;
+}
+
+.section-highlight {
+  animation: sectionArrive 1.4s ease-out;
+  border-radius: 8px;
+}
+
+/* Accesibilidad: respetar "reducir movimiento" */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .section-highlight { animation: none; }
+}
+
+.academic-modal__profile {
+  color: #555;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0 0 15px 0;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-left: 3px solid #3498db;
+  border-radius: 0 6px 6px 0;
+}
+
+/* --- Estilos del Modal Académico --- */
+.academic-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.academic-modal.open {
+  display: flex;
+}
+
+.academic-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.academic-modal__content {
+  position: relative;
+  background: #ffffff;
+  max-width: 750px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  
+}
+/* --- Botón de cerrar (cuadrado) --- */
+.academic-modal__close {
+  position: absolute;
+  top: 25px;
+  right: 15px;
+  width: 26px;            /* Ancho fijo */
+  height: 26px;           /* Alto fijo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f6f8;
+
+  font-size: 1.4rem;
+ 
+  cursor: pointer;
+  color: #7f8c8d;
+  
+  z-index: 10;
+}
+
+.academic-modal__close:hover {
+  color: #e74c3c;
+  background: #e1e8ed;
+  border-color: #d0d7de;
+}
+
+/* --- Ajuste al encabezado para evitar encimamientos --- */
+.academic-modal__header {
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  padding-right: 45px; /* 🔹 Espacio reservado para el botón */
+}
+
+.academic-modal__subtitle {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.academic-modal__links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.academic-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #eef2f6;
+  color: #3498db;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.academic-badge:hover {
+  background: #d6e6f5;
+}
+
+.academic-section {
+  margin-bottom: 25px;
+}
+
+.academic-section h3 {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  border-left: 4px solid #3498db;
+  padding-left: 10px;
+}
+
+.academic-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.academic-list li {
+  margin-bottom: 12px;
+  padding-left: 15px;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.academic-list li::before {
+  content: "•";
+  color: #3498db;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.academic-list a {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.academic-list a:hover {
+  color: #2980b9;
+}
+
+.academic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.academic-tags span {
+  background: #f4f6f8;
+  border: 1px solid #e1e8ed;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.academic-modal__footer {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #ecf0f1;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  text-align: center;
+}
+
+.academic-modal__footer a {
+  color: #3498db;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .academic-modal__content {
+    padding: 25px 20px;
+  }
+  .academic-modal__header h2 {
+    font-size: 1.5rem;
+  }
+}
   
 /* Estilo Pinterest */
 #gallery {
@@ -608,7 +818,10 @@ td a {
   <h1><a href="#"><img src="images/logo.svg" width="100px"></a></h1>
   <nav class="links">
     <ul>
-      
+      <li><button style="margin-top:20px; padding:10px 20px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openAcademicModal()"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+    </svg>
+    Académico</button></li>
       <li><a href="#i">Diseño digital</a></li>
       <li><a href="#w">Web & software</a></li>
       <li><a href="#d">Diseño gráfico</a></li>
@@ -833,12 +1046,12 @@ td a {
 </article>
 
 						<!-- Post -->
-						<article class="post" id="d">
+<article class="post" id="d">
     <header>
-        <div class="title">
-            <h2>Diseño gráfico</h2>
+        <div class="title" id="d">
+										<h2>Diseño gráfico</h2>
             <p>Diseño de logotipos, carteles etc.</p>
-        </div>
+					</div>
         <div class="meta">
             <time class="published" datetime="2015-11-01">Herramientas</time>
             <p class="author">
@@ -847,11 +1060,12 @@ td a {
             </p>
         </div>
     </header>
-    
-    <div class="wrap">
+  
+  <div class="wrap">
         <!-- Contenedor de la galería -->
         <div id="gallery" aria-live="polite"></div>
-    </div>
+  </div>
+
 </article>
 
 						
@@ -877,19 +1091,17 @@ td a {
 						<!-- About -->
 							<section class="blurb">
 								<h2>Presentación</h2>
-								<p>· robert · </br>
-Desarrollador con experiencia en la creación de soluciones funcionales y bien diseñadas. 
-Combino conocimientos en diseño gráfico e ilustración para integrar estética y usabilidad 
-en cada proyecto. Amplia trayectoria en educación a nivel media superior y superior.
-									</p>
+								<p>
+Desarrollador y diseñador con experiencia en soluciones funcionales y bien diseñadas. Combino diseño gráfico, ilustración y desarrollo web para integrar estética y usabilidad. Amplia trayectoria docente en educación media superior y superior.</p>
+
+<p>Ingeniero en Computación, Maestro en Educación y doctorante en Tecnología Educativa. Profesor y técnico académico en CUAltos (2011–presente), con experiencia en programación, IA aplicada, posgrado, publicaciones y comités académicos.</p>
 								
 								<p>
-								<button style="margin-top:20px; padding:10px 20px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="window.open('https://www.linkedin.com/in/roberto-plascencia-jim%C3%A9nez-304987103/', '_blank')">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+								
+<button style="margin-top:20px; padding:10px 20px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openAcademicModal()"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
     </svg>
-    Ver perfil académico
-</button>
+    Ver perfil académico </button>
 									</p>
 								
 							</section>
@@ -910,7 +1122,149 @@ en cada proyecto. Amplia trayectoria en educación a nivel media superior y supe
 
 			</div>
 
-			
+		<!-- Modal de Perfil Académico -->
+<div id="academic-modal" class="academic-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="academic-modal__overlay" onclick="closeAcademicModal()"></div>
+  <div class="academic-modal__content">
+    <button class="academic-modal__close" onclick="closeAcademicModal()" aria-label="Cerrar perfil">&times;</button>
+
+    <!-- Encabezado -->
+    <header class="academic-modal__header">
+      <h2 id="modal-title">Roberto Plascencia Jiménez</h2>
+      <p class="academic-modal__subtitle">Doctorado en Tecnología Educativa (en curso) · Maestría en Educación · Ing. en Computación</p>
+      <p class="academic-modal__profile">Desarrollador, docente y diseñador con trayectoria en educación media superior y superior. Combino programación, diseño gráfico e inteligencia artificial aplicada para crear soluciones funcionales, estéticas y con impacto educativo.</p>
+      <div class="academic-modal__links">
+        <a href="https://orcid.org/0000-0003-0586-4054" target="_blank" class="academic-badge">ORCID</a>
+        <a href="https://www.behance.net/reko7" target="_blank" class="academic-badge">Behance</a>
+      </div>
+    </header>
+
+    <!-- Sección: Formación Académica -->
+    <section class="academic-section">
+      <h3>Formación Académica</h3>
+      <ul class="academic-list">
+        <li><strong>Doctorado en Tecnología Educativa</strong> (2025 – 2026, en curso) — Universidad del País Innova, Tuxtla Gutiérrez, Chiapas.</li>
+        <li><strong>Maestría en Educación</strong> (2016 – 2019) — Universidad Interamericana para el Desarrollo (UNID), Tepatitlán de Morelos, Jalisco. <em>Titulado con Cédula Profesional.</em></li>
+        <li><strong>Licenciatura en Ingeniería en Computación</strong> (2005 – 2009) — Centro Universitario de los Altos (CUAltos), Universidad de Guadalajara.</li>
+      </ul>
+    </section>
+
+    <!-- Sección: Investigación y Publicaciones -->
+    <section class="academic-section">
+      <h3>Investigación y Publicaciones</h3>
+      <ul class="academic-list">
+        <li>
+          <strong>Artículo:</strong> Carranza Alcántar, M. del R., <strong>Plascencia Jiménez, R.</strong>, Islas Torres, C., &amp; Jiménez Padilla, A. A. (2020). <em>Percepción de estudiantes universitarios sobre la tutoría presencial y la virtual.</em> EDUCATECONCIENCIA, 27(28), 126–146.
+          <a href="https://tecnocientifica.com.mx/educateconciencia/index.php/revistaeducate/article/view/259" target="_blank">Ver artículo</a> |
+          <a href="https://repositorio.cualtos.udg.mx/jspui/handle/123456789/1066" target="_blank">Ver en repositorio</a>
+        </li>
+        <li><strong>Ponente:</strong> Mesa "Inteligencia Artificial y Criminología" en el III Congreso Internacional de Análisis Criminológico, "Cultura de Paz y Violencias Estructurales".</li>
+        <li><strong>Ponente:</strong> "Inteligencia Artificial para la Formación Integral" y "Plataformas Educativas".</li>
+        <li><strong>Perfil de investigación:</strong> <a href="https://orcid.org/0000-0003-0586-4054" target="_blank">ORCID 0000-0003-0586-4054</a>.</li>
+      </ul>
+    </section>
+
+    <!-- Sección: Docencia y Desarrollo -->
+    <section class="academic-section">
+      <h3>Docencia y Desarrollo</h3>
+      <ul class="academic-list">
+        <li><strong>Profesor de asignatura y técnico académico</strong> — CUAltos (2011 – Presente). Imparte Programación para Internet, Tecnologías de la Información e IA Aplicada.</li>
+        <li><strong>Docencia en posgrado:</strong> Sistemas de Análisis Estadísticos.</li>
+        <li><strong>Creación de unidades de aprendizaje:</strong> Algoritmos Metaheurísticos, RNA y Aprendizaje Profundo, Aprendizaje Máquina.</li>
+        <li><strong>Diseño, pilotaje y validación</strong> del microcurso "Comunicación Asertiva" en Moodle CUAltos.</li>
+        <li><strong>Profesor de asignatura</strong> — UNID (2015 – 2017) y Colegio Niños Héroes Tepatitlán (2017 – 2025).</li>
+        <li><strong>Tutor</strong> de Ingeniería en Computación y miembro de comités de evaluación EGEL (EGEL+D-ICOMPU).</li>
+      </ul>
+    </section>
+
+    <!-- Sección: Comités y Gestión -->
+    <section class="academic-section">
+      <h3>Comités y Gestión Académica</h3>
+      <ul class="academic-list">
+        <li>Miembro del <strong>Comité Consultivo Curricular</strong> para la actualización y modificación del plan de estudios de Ingeniería en Computación (CUAltos).</li>
+        <li><strong>Vocal</strong> del Comité de Prácticas Profesionales (CUAltos).</li>
+        <li><strong>Vocal</strong> del Comité de Titulación de la carrera de Informática.</li>
+        <li>Miembro del <strong>Subcomité de Titulación</strong> de Ingeniería en Computación.</li>
+        <li>Miembro del <strong>cuerpo académico</strong> de Problemas Sociales Multidisciplinarios y Multifactoriales.</li>
+      </ul>
+    </section>
+
+    <!-- Sección: Participación Institucional y Eventos -->
+    <section class="academic-section">
+      <h3>Participación Institucional y Eventos</h3>
+      <ul class="academic-list">
+        <li><strong>Apoyo técnico</strong> en el III Congreso Internacional de Análisis Criminológico, IV Seminario Internacional Permanente de Investigación en Cultura de Paz y Violencias Estructurales, y 1er Encuentro de Investigación Temprana.</li>
+        <li><strong>Grupo Técnico de Apoyo</strong> al proceso de Inducción 2024B — CUAltos (12 al 16 de agosto de 2024).</li>
+        <li><strong>Grupo de apoyo</strong> en la 1ª Reunión Ordinaria de la Asociación Regional de Facultades y Escuelas de Enfermería Zona Pacífico, A.C. — CUAltos (6, 7 y 8 de marzo de 2025, 40 horas).</li>
+        <li><strong>Colaborador operativo</strong> en la Feria Internacional del Huevo — Tepatitlán de Morelos (13 y 14 de octubre de 2023).</li>
+        <li><strong>Miembro del Comité Organizador</strong> del evento "Día 256 Conecta Bytes".</li>
+      </ul>
+    </section>
+
+    <!-- Sección: Reconocimientos y Distinciones (AMPLIADA) -->
+    <section class="academic-section">
+      <h3>Reconocimientos y Distinciones</h3>
+      <ul class="academic-list">
+        <li><strong>Primer Lugar</strong> — Concurso de Pintura STAUdeG TADOCU (2025).</li>
+        <li><strong>Participación</strong> — Concurso de Esculturas de la Feria Internacional del Huevo (2025).</li>
+        <li><strong>Certificación internacional:</strong> ISO/IEC 27001:2022 Lead Auditor — Professional Certification I27001LA™.</li>
+        <li><strong>Certificación internacional:</strong> Artificial Intelligence Professional Certification — CAIPC® (Certiprof, 2026 – 2029).</li>
+        <li><strong>Constancia:</strong> Curso-taller "Estrategias de enseñanza mediadas con IA y tecnologías aplicadas a la planeación didáctica" — Programa de Formación para la Innovación Docente, 40 horas (1 al 8 de julio de 2025).</li>
+        <li><strong>Constancia +UDG:</strong> Taller "Transformando el Aula con Google Classroom Plus" — Universidad de Guadalajara (15 de abril de 2026, 2 horas).</li>
+        <li><strong>Constancia +UDG:</strong> Taller "Innovación Docente con IA: Gemini, Deep Research y NotebookLM para la UdeG" — Universidad de Guadalajara (15 de abril de 2026, 2 horas).</li>
+        <li><strong>Instructor certificado:</strong> Microsoft Excel (niveles básico, intermedio y avanzado).</li>
+      </ul>
+    </section>
+
+    <!-- Sección: Habilidades Técnicas -->
+    <section class="academic-section">
+      <h3>Habilidades Técnicas</h3>
+      <div class="academic-tags">
+        <span>Adobe Creative Suite</span>
+        <span>Photoshop</span>
+        <span>Illustrator</span>
+        <span>InDesign</span>
+        <span>Figma</span>
+        <span>Blender</span>
+        <span>Cinema 4D</span>
+        <span>Premiere Pro</span>
+        <span>After Effects</span>
+        <span>DaVinci Resolve</span>
+        <span>HTML/CSS/JS</span>
+        <span>PHP</span>
+        <span>Python</span>
+        <span>Moodle</span>
+        <span>WordPress</span>
+        <span>Drupal</span>
+        <span>Joomla</span>
+        <span>IA Generativa</span>
+        <span>Prompt Engineering</span>
+        <span>Midjourney</span>
+        <span>Runway</span>
+        <span>Synthesia</span>
+        <span>ElevenLabs</span>
+      </div>
+    </section>
+
+    <!-- Sección: Idiomas -->
+    <section class="academic-section">
+      <h3>Idiomas</h3>
+      <ul class="academic-list">
+        <li><strong>Español</strong> — Nativo.</li>
+        <li><strong>Inglés</strong> — Nivel intermedio-alto (B2/C1 según CV).</li>
+      </ul>
+    </section>
+
+    <footer class="academic-modal__footer">
+      <p>Para más información: <a href="https://orcid.org/0000-0003-0586-4054" target="_blank">ORCID</a> · <a href="https://repositorio.cualtos.udg.mx/jspui/handle/123456789/1066" target="_blank">Repositorio CUAltos</a> · <a href="https://tecnocientifica.com.mx/educateconciencia/index.php/revistaeducate/article/view/259" target="_blank">Revista EDUCATECONCIENCIA</a></p>
+    </footer>
+  </div>
+</div>
+
+
+
+
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
@@ -1089,7 +1443,101 @@ fetch(apiUrl)
         gallery.appendChild(img);
     });
 </script>
+
+<script>
+  function openAcademicModal() {
+    const modal = document.getElementById('academic-modal');
+    if (modal) {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden'; // Evita el scroll de fondo
+    }
+  }
+
+  function closeAcademicModal() {
+    const modal = document.getElementById('academic-modal');
+    if (modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = ''; // Restaura el scroll
+    }
+  }
+
+  // Cerrar con la tecla ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeAcademicModal();
+    }
+  });
+</script>
    
+<script>
+(function() {
+  // Cierra el menú móvil si está abierto (replica la lógica de toggleNav)
+  function closeMobileMenuIfOpen() {
+    const nav = document.querySelector('.links');
+    if (!nav || !nav.classList.contains('open')) return;
+
+    const toggle = document.querySelector('.nav-toggle');
+
+    nav.classList.remove('open');
+    if (toggle) {
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    nav.setAttribute('aria-hidden', 'true');
+    nav.style.maxHeight = '';
+
+    // Restaurar scroll del body
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+    document.documentElement.classList.remove('menu-open');
+  }
+
+  // Interceptar los enlaces del menú (#i, #w, #d)
+  document.querySelectorAll('.links a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (!targetId || targetId === '#' || targetId.length < 2) return;
+
+      const target = document.querySelector(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+
+      // 1) Cerrar menú móvil (libera el overflow:hidden del body)
+      closeMobileMenuIfOpen();
+
+      // 2) Scroll suave (respetando reduce-motion)
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
+
+      // 3) Actualizar la URL sin salto brusco
+      if (history.pushState) {
+        history.pushState(null, '', targetId);
+      } else {
+        location.hash = targetId;
+      }
+
+      // 4) Destello visual al llegar
+      target.classList.remove('section-highlight');
+      void target.offsetWidth; // reinicia la animación
+      target.classList.add('section-highlight');
+      setTimeout(function() {
+        target.classList.remove('section-highlight');
+      }, 1600);
+    });
+  });
+
+  // También cerramos el menú móvil si se pulsa el botón "Académico"
+  document.querySelectorAll('.links button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      closeMobileMenuIfOpen();
+    });
+  });
+})();
+</script>
 
 	</body>
 
