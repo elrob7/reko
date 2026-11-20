@@ -1,37 +1,22 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<link rel="icon" href="images/favicon.svg" type="image/svg+xml" sizes="any">
-		<title> r e k o</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		 <div id="fb-root"></div>
-  		
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f7fa">
+<title>r e k o</title>
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="stylesheet" href="assets/css/main.css">
 <style>
-
-  /* --- Scroll suave y llegada visual --- */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Aire arriba de cada sección al aterrizar */
-#i, #w, #d {
-  scroll-margin-top: 30px;
-}
-
-.section-highlight {
-  animation: sectionArrive 1.4s ease-out;
-  border-radius: 8px;
-}
-
-/* Accesibilidad: respetar "reducir movimiento" */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .section-highlight { animation: none; }
-}
-
+:root{--bg:#f5f7fa;--line:#e6ebf0;--ink:#2c3e50;--accent:#3498db;--radius:12px;--gap:16px;--side-w:20rem;--pad:clamp(12px,3vw,28px)}
+html{scroll-behavior:smooth;overflow-y:scroll;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--bg);color:#333;padding:0!important;margin:0;min-width:320px;-webkit-font-smoothing:antialiased}
+img,svg,video,iframe{max-width:100%}
+:focus-visible{outline:3px solid rgba(52,152,219,.45);outline-offset:2px}
+#i,#w,#d{scroll-margin-top:88px}
+.section-highlight{animation:sectionArrive 1.4s ease-out;border-radius:var(--radius)}
+@keyframes sectionArrive{0%{box-shadow:0 0 0 0 rgba(52,152,219,.55)}100%{box-shadow:0 0 0 14px rgba(52,152,219,0)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.section-highlight{animation:none}*{transition:none!important}}
 .academic-modal__profile {
   color: #555;
   font-size: 0.92rem;
@@ -221,185 +206,7 @@ html {
   }
 }
   
-/* Estilo Pinterest */
-#gallery {
-    column-count: 3; /* 3 columnas en PC */
-    column-gap: 15px;
-    width: 100%;
-    margin-top: 20px;
-}
-
-#gallery img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    display: block;
-    break-inside: avoid; /* Evita que una imagen se corte a la mitad */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* Responsivo: 2 columnas en tablet, 1 en celular */
-@media (max-width: 900px) { #gallery { column-count: 2; } }
-@media (max-width: 600px) { #gallery { column-count: 1; } }
-
-
-
-
-
-
-     /* Estilos para la galería de Behance */
-    .behance-gallery {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 columnas exactas */
-        gap: 15px; 
-        margin-top: 20px;
-    }
-    .behance-item {
-        width: 100%; /* Ocupa todo el ancho de su columna */
-        border-radius: 8px;
-        overflow: hidden; 
-        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-        background: #fff;
-        transition: transform 0.2s ease;
-    }
-    .behance-item:hover {
-        transform: translateY(-3px); 
-    }
-    .behance-item iframe {
-        width: 100%;
-        height: 240px; 
-        border: none;
-        display: block;
-        overflow: hidden; 
-    }
-    
-    /* Ajuste para pantallas medianas (tablets) -> 2 columnas */
-    @media (max-width: 900px) {
-        .behance-gallery {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    /* Ajuste para celulares -> 1 columna */
-    @media (max-width: 500px) {
-        .behance-gallery {
-            grid-template-columns: 1fr;
-        }
-        .behance-item iframe {
-            height: 220px;
-        }
-    }
-
- /* Estilos específicos para hacer la tabla más compacta */
-    .tabla-compacta table { font-size: 0.85rem; }
-    .tabla-compacta th { padding: 8px 10px; font-size: 0.9rem; }
-    .tabla-compacta td { padding: 8px 10px; }
-    .tabla-compacta td img { width: 20px !important; } /* Iconos más pequeños */
-    .tabla-compacta td .badge { padding: 2px 6px; font-size: 0.65rem; margin: 0 4px 0 0; }
-    .tabla-compacta .enlace a { font-size: 0.8rem; font-weight: 600; }
-  /* Evita salto por scrollbar */
-html { overflow-y: scroll; }
-
-/* Asegura que el header no cambie en desktop */
-#header {
-  box-sizing: border-box;
-  width: 100%;
-  left: 0;
-  right: 0;
-  margin: 0;
-  min-height: 64px; /* evita cambios de alto al aparecer el botón */
-}
-
-/* hamburger: por defecto oculto (no toca layout en desktop) */
-.nav-toggle {
-  display: none;
-  background: transparent;
-  border: 0;
-  padding: 8px;
-  cursor: pointer;
-  width: 44px;
-  height: 44px;
-  align-items: center;
-  justify-content: center;
-}
-
-/* líneas de la hamburguesa */
-.hamburger,
-.hamburger::before,
-.hamburger::after {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #222;
-  position: relative;
-  transition: transform .22s ease, opacity .22s ease;
-}
-.hamburger::before { content: ''; position: absolute; left: 0; top: -7px; width: 22px; height: 2px; }
-.hamburger::after  { content: ''; position: absolute; left: 0; top: 7px; width: 22px; height: 2px; }
-
-/* estilos cuando está abierto (clase .open en el botón) */
-.nav-toggle.open .hamburger { background: transparent; }
-.nav-toggle.open .hamburger::before { transform: translateY(7px) rotate(45deg); }
-.nav-toggle.open .hamburger::after  { transform: translateY(-7px) rotate(-45deg); }
-
-/* --- Solo en pantallas pequeñas: mostrar hamburger y hacer nav absoluto --- */
-@media (max-width: 900px) {
-  .nav-toggle { display: inline-flex; position: relative; z-index: 1100; }
-
-  /* mantenemos header sin cambios, sólo convertimos el nav en panel absoluto */
-  #header { padding: 12px 14px; }
-
-  /* nav fuera del flujo, justo debajo del header */
-  .links {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    background: white;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height .32s cubic-bezier(.2,.9,.2,1), box-shadow .2s;
-    box-shadow: none;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    z-index: 1050;
-  }
-
-  /* clase que abre el panel (añadida por JS) */
-  .links.open { max-height: 520px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-
-  .links ul { display: block; padding: 12px 16px; margin:0; }
-  .links li { margin: 0; padding: 8px 0; border-bottom: 1px solid #f0f0f0; list-style:none; }
-  .links li:last-child { border-bottom: none; }
-  .links a { display: block; padding: 10px 6px; }
-}
-
-  /* asegura ancho y posición consistente */
-#header {
-  box-sizing: border-box;
-  width: 100%;
-  left: 0;
-  right: 0;
-  margin: 0;
-  /* si no quieres que sea fixed, comentarlo */
-  /* position: fixed; top: 0; z-index: 1100; */
-  /* mantiene mínimo alto para que no colapse */
-  min-height: 64px;
-}
-
-/* evitar transform/translate indeseados en el header */
-#header, #header * {
-  transform: none !important;
-}
-
-/* desactiva cualquier margin colateral inesperado agregado al abrir menú */
-body.menu-open, html.menu-open {
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-}
-
-	 * {
+* {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -494,61 +301,7 @@ td a {
   white-space: normal;
 }
 
-/* --- Comportamiento responsivo: a partir de aquí se transforma en "cards" --- */
-@media (max-width: 768px) {
-
-  /* esconder cabeceras si las tienes en thead (opcional) */
-  thead { display: none; }
-
-  /* convertir cada fila en bloque */
-  tbody tr {
-    display: block;
-    margin: 0 0 12px 0;
-    padding: 12px;
-    border: 1px solid #eceff1;
-    border-radius: 8px;
-    background: #fff;
-  }
-
-  /* cada celda ocupa toda la fila y se muestra como fila flex para alinear label+valor */
-  tbody td {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 8px 10px;
-  }
-
-  /* label generado por CSS (columna) */
-  tbody td::before {
-    content: attr(data-label); /* por defecto intentamos usar data-label si existiera */
-    flex: 0 0 110px; /* ancho de la "etiqueta" */
-    font-weight: 600;
-    padding-right: 10px;
-    opacity: 0.9;
-    text-transform: none;
-  }
-
-  /* si no quieres modificar HTML para añadir data-label, usa nth-child para fijar etiquetas */
-  tbody tr td:nth-child(1)::before { content: "Logo"; }
-  tbody tr td:nth-child(2)::before { content: "Nombre"; }
-  tbody tr td:nth-child(3)::before { content: "Enlace"; }
-  tbody tr td:nth-child(4)::before { content: "Descripción"; }
-
-  /* hacer que la celda de imagen sea más estrecha */
-  tbody tr td:nth-child(1) { padding: 8px 6px; flex: 0 0 80px; justify-content: center; }
-  tbody tr td:nth-child(1) img { width: 60px; }
-
-  /* permitir que la "descripción" ocupe el resto del espacio */
-  tbody tr td:nth-child(4) { flex: 1 1 auto; }
-
-  /* ajustar padding y tamaño de texto para mobile */
-  th, td { padding: 10px 12px; font-size: 0.95rem; }
-
-  /* enlaces ocupen varias líneas sin romper el contenedor */
-  td a { white-space: normal; }
-}
-        
-        .nombre {
+.nombre {
             font-weight: 300;
             color: #2c3e50;
         }
@@ -602,229 +355,126 @@ td a {
             font-size: 0.9rem;
             margin-top: 20px;
         }
-  :root{
-    --gap: 18px;
-    --card-radius: 12px;
-    --bg: #f6f7f8;
-  }
+  
+/* ===== Layout (escritorio): cabecera arriba, contenido + barra lateral ===== */
+#wrapper{display:grid!important;grid-template-columns:minmax(0,1fr) var(--side-w);grid-template-areas:"head head" "main side";gap:var(--gap) 24px;align-items:start;width:100%!important;max-width:1280px;margin:0 auto!important;padding:10px var(--pad) 28px!important;position:static!important;float:none!important;transform:none!important;min-height:0!important}
+#header{grid-area:head;position:sticky!important;top:10px;left:auto!important;right:auto!important;bottom:auto!important;z-index:1000;display:flex!important;align-items:center;justify-content:space-between;gap:16px;width:auto!important;min-height:64px;height:auto!important;margin:0!important;padding:8px 18px!important;background:#fff!important;border:1px solid var(--line)!important;border-radius:var(--radius);box-shadow:0 4px 16px rgba(0,0,0,.06);text-align:left}
+#header .brand{margin:0!important;padding:0!important;border:0!important;line-height:0}
+#header .brand a{display:block;border:0}
+#header .brand img{display:block;width:100px;height:auto}
+#header .links{position:static!important;display:block!important;height:auto!important;max-height:none!important;width:auto!important;margin:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;opacity:1!important;visibility:visible!important;overflow:visible!important}
+#header .links ul{display:flex!important;flex-wrap:wrap;justify-content:flex-end;gap:8px;margin:0!important;padding:0!important;list-style:none}
+#header .links li{display:block!important;margin:0!important;padding:0!important;border:0!important;list-style:none}
+#header .links li::before,#header .links li::after{content:none!important}
+.nav-item{-webkit-appearance:none;appearance:none;display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:44px;height:auto!important;margin:0!important;padding:10px 16px!important;border:1px solid var(--line)!important;border-radius:10px;background:#fff!important;color:var(--ink)!important;font:600 .9rem/1.2 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;letter-spacing:0!important;text-transform:none!important;text-decoration:none!important;text-align:center;white-space:nowrap;cursor:pointer;box-shadow:none!important;transition:background .2s,border-color .2s}
+.nav-item:hover{background:#eef6fd!important;border-color:#bcdcf5!important}
+.nav-item--accent{background:var(--accent)!important;border-color:var(--accent)!important;color:#fff!important}
+.nav-item--accent:hover{background:#2b87c4!important;border-color:#2b87c4!important}
+.btn-academic{width:100%;margin-top:6px!important}
+#main{grid-area:main;width:auto!important;min-width:0;margin:0!important;padding:0!important;position:static!important;float:none!important;border:0!important}
+#sidebar{grid-area:side;display:flex!important;flex-direction:column;gap:var(--gap);width:auto!important;min-width:0;margin:0!important;padding:0!important;position:static!important;border:0!important;background:none!important}
+#intro,.blurb,#footer{background:#fff!important;border:1px solid var(--line)!important;border-radius:var(--radius);padding:22px!important;margin:0!important;width:auto!important}
+#intro{text-align:center}
+#intro header{margin:0!important;padding:0!important;border:0!important}
+#intro h3{margin:12px 0 4px}
+.blurb h2{margin-bottom:12px;font-size:1.25rem}
+.blurb p{margin:0 0 12px;line-height:1.65;color:#555}
+#footer .icons{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;list-style:none;margin:0 0 10px!important;padding:0}
+#footer .icons a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+#footer .copyright{text-align:center;margin:0}
 
-  body{
-    margin:0;
-    font-family: Inter, system-ui, Arial, sans-serif;
-    background: var(--bg);
-    color:#222;
-    padding:28px;
-    -webkit-font-smoothing:antialiased;
-  }
+/* ===== Secciones ===== */
+#main .post{width:auto!important;max-width:100%;min-width:0;margin:0 0 var(--gap)!important;padding:24px!important;background:#fff!important;border:1px solid var(--line)!important;border-radius:var(--radius)}
+#main .post>header{display:flex!important;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px 20px;margin:0 0 18px!important;padding:0 0 14px!important;border-bottom:1px solid #ecf0f1;text-align:left}
+#main .post>header .title{flex:1 1 240px;min-width:0;margin:0!important;padding:0!important;border:0!important}
+#main .post>header .title h2{margin:0 0 4px;font-size:clamp(1.4rem,4.5vw,2rem);line-height:1.2}
+#main .post>header .title p{margin:0;color:#7f8c8d;font-size:.95rem}
+#main .post>header .meta{flex:0 1 auto;display:flex;align-items:center;gap:10px;width:auto!important;margin:0!important;padding:0!important;border:0!important;text-align:left!important}
+#main .post>header .meta .author{display:flex;align-items:center;gap:8px;margin:0!important;padding:0!important}
+#main .post>header .meta .author .name{display:none}
+#main .post>header .meta .author img{width:34px!important;height:34px!important;object-fit:contain;margin:0!important}
 
-  .wrap{
-    max-width:1200px;
-    margin:0 auto;
-  }
+/* Behance */
+.behance-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:15px;margin-top:20px}
+.behance-item{width:100%;aspect-ratio:404/316;border-radius:8px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.08);background:#fff;transition:transform .2s ease}
+.behance-item:hover{transform:translateY(-3px)}
+.behance-item iframe{width:100%;height:100%;border:0;display:block}
 
-  .gallery{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: var(--gap);
-  }
+/* Tabla de proyectos web */
+.tabla-compacta{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabla-compacta table{font-size:.85rem}
+.tabla-compacta td{padding:8px 10px}
+.tabla-compacta td .badge{padding:2px 6px;font-size:.65rem;margin:0 4px 0 0}
+.tabla-compacta .enlace a{font-size:.8rem;font-weight:600}
 
-  .card{
-    border-radius: var(--card-radius);
-    overflow: hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height: 0;
-    padding-bottom: 70%; /* forma más horizontal */
-    position: relative;
-    cursor: pointer;
-    background: #fff;
-    transition: transform .18s ease;
-  }
+/* Galería tipo Pinterest */
+.wrap{width:100%;max-width:1200px;margin:0 auto}
+#gallery{column-count:3;column-gap:15px;width:100%;margin-top:20px}
+#gallery img{width:100%;height:auto;margin-bottom:15px;border-radius:8px;display:block;break-inside:avoid;box-shadow:0 2px 5px rgba(0,0,0,.1)}
 
-  .card:hover{ transform: scale(1.03); }
+/* Botón flotante para volver al menú (solo móvil) */
+.menu-fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:900;display:none;align-items:center;gap:8px;min-height:48px;padding:0 18px;border:0;border-radius:999px;background:var(--ink);color:#fff;font:600 .9rem 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.25);cursor:pointer;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
+.menu-fab.show{opacity:1;transform:none;pointer-events:auto}
 
-  .card .inner{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    border-radius: var(--card-radius);
-  }
+/* Modal académico: el botón cerrar queda fijo y solo el contenido hace scroll */
+.academic-modal{padding:16px}
+.academic-modal__content{padding:0!important;max-height:90vh;max-height:90dvh;overflow:hidden!important;display:flex;flex-direction:column}
+.academic-modal__scroll{flex:1 1 auto;min-height:0;padding:36px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.academic-modal__close{top:12px!important;right:12px!important;width:40px!important;height:40px!important;border:0;border-radius:50%;line-height:1}
+.academic-modal__scroll li,.academic-modal__subtitle,.academic-modal__footer p{overflow-wrap:anywhere}
 
-  .card img{
-    display:block;
-    max-width:100%;
-    max-height:100%;
-    width:auto;
-    height:auto;
-    object-fit: contain;
-    user-select: none;
-    -webkit-user-drag: none;
-  }
-
-  /* Responsive: menos columnas en pantallas pequeñas */
-  @media (max-width:1100px){ .gallery{ grid-template-columns: repeat(5,1fr);} }
-  @media (max-width:900px){ .gallery{ grid-template-columns: repeat(4,1fr);} }
-  @media (max-width:700px){ .gallery{ grid-template-columns: repeat(3,1fr);} }
-  @media (max-width:420px){ .gallery{ grid-template-columns: repeat(2,1fr);} }
-
-  /* Modal */
-  .modal{
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
- 
-  }
-
-  .modal.open{ display:flex; }
-
-  /* 🔸 Caja del modal SIN marco ni sombra */
-  .modal .box{
-    max-width: 95vw;
-    max-height: 95vh;
-    background: transparent;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-	 border: none;
-  box-shadow: none;
-  outline: none;
-  }
-
-  /* 🔸 Imagen sin borde ni sombra */
-  .modal img{
-    max-width: 600px;
-    max-height: 600px;
-	 border: none;
-  box-shadow: none;
-  outline: none;
-   border: none;
-  box-shadow: none;
-  outline: none;
-    
-  }
-
- /* 🔸 Botón de cerrar ultraminimalista */
-.modal .close {
-  position: absolute;
-  top: 16px;
-  right: 22px;
-  background: none;           /* sin fondo */
- border: none;
-  box-shadow: none;
-  outline: none;
-  font-size: 10px;
- 
+/* ===== Tablet y móvil (≤980px): una columna ===== */
+@media (max-width:980px){
+  #wrapper{display:flex!important;flex-direction:column;gap:0;padding:12px var(--pad) 24px!important}
+  #header,#sidebar{display:contents!important}
+  #header .brand{display:none!important}
+  #intro{order:1;margin-bottom:var(--gap)!important}
+  .blurb{order:2;margin-bottom:var(--gap)!important}
+  #header .links{order:3;margin-bottom:var(--gap)!important;padding:12px!important;background:#fff!important;border:1px solid var(--line)!important;border-radius:var(--radius)}
+  #main{order:4}
+  #footer{order:5}
+  #header .links ul{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+  .nav-item{width:100%;white-space:normal}
+  #i,#w,#d{scroll-margin-top:12px}
+  .menu-fab{display:inline-flex}
 }
-
-
-
-  .card:focus { outline: 3px solid rgba(0,123,255,0.2); outline-offset: 4px; }
-
-
-   .logo-container {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        #Capa_1 {
-            width: 100%;
-            height: 100%;
-        }
-        
-        /* Animación de cabeza */
-        .move-head {
-            animation: headMove 0.6s ease-in-out;
-        }
-        
-        @keyframes headMove {
-            0%, 100% { 
-                transform: translateY(0) rotate(0); 
-            }
-            25% { 
-                transform: translateY(-3px) rotate(-1deg); 
-            }
-            50% { 
-                transform: translateY(-5px) rotate(2deg); 
-            }
-            75% { 
-                transform: translateY(-2px) rotate(-1deg); 
-            }
-        }
-        
-        /* Animación de patas delanteras */
-        .move-front-feet path[fill="#4C626F"]:nth-child(2),
-        .move-front-feet path[fill="#4C626F"]:nth-child(7) {
-            animation: frontFeetMove 0.5s ease-in-out;
-        }
-        
-        @keyframes frontFeetMove {
-            0%, 100% { 
-                transform: translateY(0) rotate(0); 
-            }
-            30% { 
-                transform: translateY(-2px) rotate(1deg); 
-            }
-            60% { 
-                transform: translateY(-3px) rotate(-1deg); 
-            }
-        }
-        
-        /* Efecto de clic suave */
-        .click-effect {
-            animation: clickPulse 0.3s ease-out;
-        }
-        
-        @keyframes clickPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(0.99); }
-            100% { transform: scale(1); }
-        }
-        
-        .instructions {
-            margin-top: 20px;
-            color: #4C626F;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        
-        .sub-instructions {
-            margin-top: 5px;
-            color: #666;
-            font-size: 14px;
-        }
+@media (max-width:700px){#gallery{column-count:2;column-gap:10px}#gallery img{margin-bottom:10px}}
+@media (max-width:640px){
+  .tabla-compacta table,.tabla-compacta tbody{display:block}
+  .tabla-compacta tbody tr{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;margin-bottom:10px;padding:12px;border:1px solid #eceff1;border-radius:10px;background:#fff}
+  .tabla-compacta td{display:block;padding:0!important;border:0!important}
+  .tabla-compacta td.nombre{font-weight:600;font-size:1rem}
+  .tabla-compacta td.enlace{justify-self:end}
+  .tabla-compacta td.enlace a{display:inline-block;padding:8px 14px;border:1px solid #cfe4f7;border-radius:8px}
+  .tabla-compacta td.descripcion{grid-column:1/-1}
+}
+@media (max-width:600px){
+  #main .post{padding:16px!important}
+  #intro,.blurb,#footer{padding:18px!important}
+  #main .post>header{flex-direction:column;gap:10px}
+  .academic-modal{padding:8px}
+  .academic-modal__scroll{padding:22px 18px}
+}
+@media (max-width:359px){#gallery{column-count:1}}
 </style>
+</head>
+<body>
 
-
-	</head>
-	<body class="is-preload">
 
 		<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Header -->
 <header id="header">
-  <h1><a href="#"><img src="images/logo.svg" width="100px"></a></h1>
-  <nav class="links">
+  <h1 class="brand"><a href="#" aria-label="Inicio"><img src="images/logo.svg" width="100" alt="r e k o"></a></h1>
+  <nav class="links" id="menu" aria-label="Menú principal">
     <ul>
-      <li><button style="margin-top:20px; padding:10px 20px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openAcademicModal()"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <li><button type="button" class="nav-item nav-item--accent" onclick="openAcademicModal()"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
-    </svg>
-    Académico</button></li>
-      <li><a href="#i">Arte digital</a></li>
-      <li><a href="#w">Web & software</a></li>
-      <li><a href="#d">Diseño gráfico</a></li>
+    </svg>Académico</button></li>
+      <li><a class="nav-item" href="#i">Arte digital</a></li>
+      <li><a class="nav-item" href="#w">Web &amp; software</a></li>
+      <li><a class="nav-item" href="#d">Diseño gráfico</a></li>
     </ul>
   </nav>
 </header>
@@ -839,9 +489,9 @@ td a {
 
 
 						<!-- Post -->
-							<article class="post">
+							<article class="post" id="i">
 								<header>
-									<div class="title" id="i">
+									<div class="title">
 										<h2>Arte digital</h2>
 										<p>Ilustraciones orientadas al diseño conceptual</p>
 									</div>
@@ -857,28 +507,28 @@ td a {
 <div class="behance-gallery">
     <!-- Proyecto 1 -->
     <div class="behance-item">
-        <iframe src="https://www.behance.net/embed/project/238380509?ilo0=1" scrolling="no" allowfullscreen lazyload allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/238380509?ilo0=1" scrolling="no" allowfullscreen loading="lazy" title="Proyecto en Behance" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
     <!-- Proyecto 2 -->
     <div class="behance-item">
-        <iframe src="https://www.behance.net/embed/project/162265501?ilo0=1" scrolling="no" allowfullscreen lazyload allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/162265501?ilo0=1" scrolling="no" allowfullscreen loading="lazy" title="Proyecto en Behance" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
     
     <!-- Proyecto 3 -->
     <div class="behance-item">
-        <iframe src="https://www.behance.net/embed/project/153855539?ilo0=1" scrolling="no" allowfullscreen lazyload allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/153855539?ilo0=1" scrolling="no" allowfullscreen loading="lazy" title="Proyecto en Behance" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
     
     <!-- Proyecto 4 -->
     <div class="behance-item">
-        <iframe src="https://www.behance.net/embed/project/153851969?ilo0=1" scrolling="no" allowfullscreen lazyload allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.behance.net/embed/project/153851969?ilo0=1" scrolling="no" allowfullscreen loading="lazy" title="Proyecto en Behance" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
 
 <div class="behance-item">
-<iframe src="https://www.behance.net/embed/project/153853745?ilo0=1" scrolling="no" allowfullscreen lazyload allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin""></iframe>
+<iframe src="https://www.behance.net/embed/project/153853745?ilo0=1" scrolling="no" allowfullscreen loading="lazy" title="Proyecto en Behance" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
  </div>
  <div class="behance-item">
-<iframe src="https://www.behance.net/embed/project/28971001?ilo0=1" scrolling="no" allowfullscreen lazyload allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin""></iframe>
+<iframe src="https://www.behance.net/embed/project/28971001?ilo0=1" scrolling="no" allowfullscreen loading="lazy" title="Proyecto en Behance" allow="clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 
 </div>
@@ -894,9 +544,9 @@ td a {
 </footer>
 							</article>
 
-              <article class="post">
+              <article class="post" id="w">
 								<header>
-									<div class="title" id="w">
+									<div class="title">
 										<h2>Web | software</h2>
 										<p>Desarrollo de páginas web y software web personalizado</p>
 									</div>
@@ -1048,7 +698,7 @@ td a {
 						<!-- Post -->
 <article class="post" id="d">
     <header>
-        <div class="title" id="d">
+        <div class="title">
 										<h2>Diseño gráfico</h2>
             <p>Diseño de logotipos, carteles etc.</p>
 					</div>
@@ -1082,7 +732,7 @@ td a {
                 
 								<header>
                   <img src="images/logo2.svg" alt="" style="width: 110px; display: block; margin: 0 auto;" />
-									<h3>r e k o </h3></br>
+									<h3>r e k o</h3>
 									<p>Web . diseño . software . arte</p>
 								</header>
 							</section>
@@ -1098,7 +748,7 @@ Desarrollador y diseñador con experiencia en soluciones funcionales y bien dise
 								
 								<p>
 								
-<button style="margin-top:20px; padding:10px 20px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="openAcademicModal()"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+<button type="button" class="nav-item nav-item--accent btn-academic" onclick="openAcademicModal()"> <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
     </svg>
     Ver perfil académico </button>
@@ -1126,7 +776,8 @@ Desarrollador y diseñador con experiencia en soluciones funcionales y bien dise
 <div id="academic-modal" class="academic-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="academic-modal__overlay" onclick="closeAcademicModal()"></div>
   <div class="academic-modal__content">
-    <button class="academic-modal__close" onclick="closeAcademicModal()" aria-label="Cerrar perfil">&times;</button>
+    <button type="button" class="academic-modal__close" onclick="closeAcademicModal()" aria-label="Cerrar perfil">&times;</button>
+    <div class="academic-modal__scroll">
 
     <!-- Encabezado -->
     <header class="academic-modal__header">
@@ -1258,161 +909,63 @@ Desarrollador y diseñador con experiencia en soluciones funcionales y bien dise
     <footer class="academic-modal__footer">
       <p>Para más información: <a href="https://orcid.org/0000-0003-0586-4054" target="_blank">ORCID</a> · <a href="https://repositorio.cualtos.udg.mx/jspui/handle/123456789/1066" target="_blank">Repositorio CUAltos</a> · <a href="https://tecnocientifica.com.mx/educateconciencia/index.php/revistaeducate/article/view/259" target="_blank">Revista EDUCATECONCIENCIA</a></p>
     </footer>
+    </div>
   </div>
 </div>
 
 
-
-
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+<button type="button" class="menu-fab" id="menu-fab" aria-label="Ir al menú">&#9776; Menú</button>
 <script>
-const username = "reko7"; // 🔹 tu usuario Behance
-const rssUrl = `https://www.behance.net/feeds/user?username=${username}`;
-const apiUrl = `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(rssUrl)}`;
+(function () {
+  var modal = document.getElementById('academic-modal'), lastFocus = null;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-fetch(apiUrl)
-  .then(res => res.text())
-  .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-  .then(data => {
-    const items = data.querySelectorAll("item");
-    const container = document.getElementById("projects-container");
-    items.forEach(el => {
-      const title = el.querySelector("title").textContent;
-      const link = el.querySelector("link").textContent;
-      const description = el.querySelector("description").textContent;
-      // 🔍 extraemos el primer <img src="...">
-      const imgMatch = description.match(/<img[^>]+src=['"]([^'"]+)['"]/);
-      const imgUrl = imgMatch ? imgMatch[1] : "https://via.placeholder.com/220";
-
-      const div = document.createElement("div");
-      div.style.width = "120px";
-      div.style.textAlign = "center";
-      div.style.margin = "10px";
-      div.innerHTML = `
-        <a href="${link}" target="_blank" style="text-decoration:none;color:inherit;">
-          <img src="${imgUrl}" alt="${title}" style="width:100%;border-radius:8px;">
-          <p>${title}</p>
-        </a>
-      `;
-      container.appendChild(div);
-    });
-  })
-  .catch(err => console.error("Error al cargar proyectos Behance:", err));
-</script>
-
-
-
-<script>
-(function(){
-  // helpers
-  function getScrollbarWidth(){ return window.innerWidth - document.documentElement.clientWidth; }
-  function lockBodyScroll(){
-    const sw = getScrollbarWidth();
+  window.openAcademicModal = function () {
+    if (!modal) return;
+    lastFocus = document.activeElement;
+    modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    if (sw > 0) document.body.style.paddingRight = sw + 'px';
-    document.documentElement.classList.add('menu-open');
-  }
-  function unlockBodyScroll(){
+    var sc = modal.querySelector('.academic-modal__scroll'); if (sc) sc.scrollTop = 0;
+    var c = modal.querySelector('.academic-modal__close'); if (c) c.focus();
+  };
+  window.closeAcademicModal = function () {
+    if (!modal) return;
+    modal.classList.remove('open');
     document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
-    document.documentElement.classList.remove('menu-open');
-  }
-
-  const header = document.getElementById('header');
-  const nav = header ? header.querySelector('.links') : null;
-  if (!header || !nav) return;
-
-  let toggleBtn = null;
-
-
-  function removeToggleIfExists(){
-    if (!toggleBtn) return;
-    toggleBtn.removeEventListener('click', toggleNav);
-    if (toggleBtn.parentNode) toggleBtn.parentNode.removeChild(toggleBtn);
-    toggleBtn = null;
-  }
-
-  function toggleNav(e){
-    e.stopPropagation();
-    const isMobile = window.innerWidth <= 900;
-    const opening = !nav.classList.contains('open');
-
-    nav.classList.toggle('open', opening);
-    if (toggleBtn) toggleBtn.classList.toggle('open', opening);
-    if (toggleBtn) toggleBtn.setAttribute('aria-expanded', opening ? 'true' : 'false');
-    nav.setAttribute('aria-hidden', opening ? 'false' : 'true');
-
-    // Solo aplicar maxHeight en mobile — y limpiarlo en desktop
-    if (isMobile) {
-      // forzar cálculo y transición segura:
-      nav.style.maxHeight = opening ? nav.scrollHeight + 'px' : '0';
-    } else {
-      nav.style.maxHeight = '';
-    }
-
-    if (opening) lockBodyScroll(); else unlockBodyScroll();
-  }
-
-  // cerrar al click fuera
-  document.addEventListener('click', function(e){
-    if (!nav.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target) && nav.classList.contains('open')) {
-      nav.classList.remove('open');
-      if (toggleBtn) toggleBtn.classList.remove('open');
-      if (toggleBtn) toggleBtn.setAttribute('aria-expanded','false');
-      nav.setAttribute('aria-hidden','true');
-      // limpiar inline style (por si)
-      nav.style.maxHeight = '';
-      unlockBodyScroll();
-    }
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  };
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal && modal.classList.contains('open')) closeAcademicModal();
   });
 
-  // cerrar con escape
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && nav.classList.contains('open')) {
-      nav.classList.remove('open');
-      if (toggleBtn) { toggleBtn.classList.remove('open'); toggleBtn.setAttribute('aria-expanded','false'); toggleBtn.focus(); }
-      nav.setAttribute('aria-hidden','true');
-      nav.style.maxHeight = '';
-      unlockBodyScroll();
-    }
+  // Menú: scroll suave + destello al llegar
+  document.querySelectorAll('.links a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
+      if (!id || id.length < 2) return;
+      var t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      if (history.pushState) history.pushState(null, '', id); else location.hash = id;
+      t.classList.remove('section-highlight'); void t.offsetWidth; t.classList.add('section-highlight');
+      setTimeout(function () { t.classList.remove('section-highlight'); }, 1600);
+    });
   });
 
-  // show/hide toggle según ancho, y forzar cierre al pasar a desktop
-  function handleResize(){
-    if (window.innerWidth <= 900) {
-      createToggleIfNeeded();
-      // asegurar que nav no tenga comportamiento de desktop oculto
-      nav.setAttribute('aria-hidden', nav.classList.contains('open') ? 'false' : 'true');
-    } else {
-      // cerrar si abierto y limpiar estilos inline para evitar que afecte layout
-      if (nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        if (toggleBtn) toggleBtn.classList.remove('open');
-        unlockBodyScroll();
-      }
-      // eliminar cualquier max-height inline que pudiera quedar
-      nav.style.maxHeight = '';
-      nav.setAttribute('aria-hidden','false');
-      removeToggleIfExists();
-    }
+  // Botón flotante: aparece cuando el menú no está a la vista (móvil)
+  var fab = document.getElementById('menu-fab'), menu = document.getElementById('menu');
+  if (fab && menu) {
+    fab.addEventListener('click', function () {
+      menu.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { fab.classList.toggle('show', !en[0].isIntersecting); }).observe(menu);
+    } else { fab.classList.add('show'); }
   }
 
-  // inicial
-  handleResize();
-  window.addEventListener('resize', handleResize);
-})();
-</script>
-
-
-    <script>
-    // 1. Pon aquí la lista de TODAS tus imágenes
-    const files = [
+  // Galería de diseño gráfico
+  var files = [
         "dai.png","punto.png", "unimed.jpg", "aldo.jpg", "mexti.png", "nutjaz.jpg", "taba.png", "cdp-01.jpg", "cscualtos.jpg", 
 		"Cartel-01.jpg","44galeria.jpg", "achtli.jpg", "agro.jpg", "agroindustrial.jpg", "aj.jpg", "alchile.jpg",
         "ar.jpg", "AT.jpg", "banana.jpg", "berry.jpg", "blife.jpg", "bp.jpg",
@@ -1428,126 +981,37 @@ fetch(apiUrl)
         "turko.jpg", "unimed.jpg", "ventanacualtos.jpg", "vrpark.jpg", "x.jpg", "x2.jpg",
         "x3.jpg", "yala.jpg"
     ];
-
-    const gallery = document.getElementById('gallery');
-
-    // 2. Recorremos la lista y creamos las imágenes
-    files.forEach(filename => {
-        const img = document.createElement('img');
-        // Ajusta la ruta si es necesario (asumiendo que están en images/galeria/)
-        img.src = 'images/galeria/' + filename; 
-        img.loading = 'lazy'; // Para que cargue rápido
-        img.alt = 'Diseño gráfico';
-        
-        // Nota: No agregamos ningún evento 'onclick' aquí
-        
-        gallery.appendChild(img);
-    });
-</script>
-
-<script>
-  function openAcademicModal() {
-    const modal = document.getElementById('academic-modal');
-    if (modal) {
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden'; // Evita el scroll de fondo
-    }
-  }
-
-  function closeAcademicModal() {
-    const modal = document.getElementById('academic-modal');
-    if (modal) {
-      modal.classList.remove('open');
-      document.body.style.overflow = ''; // Restaura el scroll
-    }
-  }
-
-  // Cerrar con la tecla ESC
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeAcademicModal();
-    }
-  });
-</script>
-   
-<script>
-(function() {
-  // Cierra el menú móvil si está abierto (replica la lógica de toggleNav)
-  function closeMobileMenuIfOpen() {
-    const nav = document.querySelector('.links');
-    if (!nav || !nav.classList.contains('open')) return;
-
-    const toggle = document.querySelector('.nav-toggle');
-
-    nav.classList.remove('open');
-    if (toggle) {
-      toggle.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-    nav.setAttribute('aria-hidden', 'true');
-    nav.style.maxHeight = '';
-
-    // Restaurar scroll del body
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
-    document.documentElement.classList.remove('menu-open');
-  }
-
-  // Interceptar los enlaces del menú (#i, #w, #d)
-  document.querySelectorAll('.links a[href^="#"]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (!targetId || targetId === '#' || targetId.length < 2) return;
-
-      const target = document.querySelector(targetId);
-      if (!target) return;
-
-      e.preventDefault();
-
-      // 1) Cerrar menú móvil (libera el overflow:hidden del body)
-      closeMobileMenuIfOpen();
-
-      // 2) Scroll suave (respetando reduce-motion)
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      target.scrollIntoView({
-        behavior: reduceMotion ? 'auto' : 'smooth',
-        block: 'start'
-      });
-
-      // 3) Actualizar la URL sin salto brusco
-      if (history.pushState) {
-        history.pushState(null, '', targetId);
-      } else {
-        location.hash = targetId;
-      }
-
-      // 4) Destello visual al llegar
-      target.classList.remove('section-highlight');
-      void target.offsetWidth; // reinicia la animación
-      target.classList.add('section-highlight');
-      setTimeout(function() {
-        target.classList.remove('section-highlight');
-      }, 1600);
-    });
+  var gallery = document.getElementById('gallery'), seen = {};
+  if (gallery) files.forEach(function (f) {
+    if (seen[f]) return; seen[f] = 1;
+    var img = document.createElement('img');
+    img.src = 'images/galeria/' + f; img.loading = 'lazy'; img.decoding = 'async'; img.alt = 'Diseño gráfico';
+    gallery.appendChild(img);
   });
 
-  // También cerramos el menú móvil si se pulsa el botón "Académico"
-  document.querySelectorAll('.links button').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      closeMobileMenuIfOpen();
-    });
-  });
+  // Feed de Behance (solo corre si existe #projects-container)
+  var container = document.getElementById('projects-container');
+  if (container) {
+    var rssUrl = 'https://www.behance.net/feeds/user?username=reko7';
+    fetch('https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(rssUrl))
+      .then(function (r) { return r.text(); })
+      .then(function (s) { return new DOMParser().parseFromString(s, 'text/xml'); })
+      .then(function (data) {
+        data.querySelectorAll('item').forEach(function (el) {
+          var title = el.querySelector('title').textContent, link = el.querySelector('link').textContent;
+          var m = el.querySelector('description').textContent.match(/<img[^>]+src=['"]([^'"]+)['"]/);
+          var div = document.createElement('div');
+          div.style.cssText = 'width:120px;text-align:center;margin:10px';
+          var a = document.createElement('a'); a.href = link; a.target = '_blank'; a.style.cssText = 'text-decoration:none;color:inherit';
+          var im = document.createElement('img'); im.src = m ? m[1] : ''; im.alt = title; im.style.cssText = 'width:100%;border-radius:8px';
+          var p = document.createElement('p'); p.textContent = title;
+          a.appendChild(im); a.appendChild(p); div.appendChild(a); container.appendChild(div);
+        });
+      })
+      .catch(function (err) { console.error('Error al cargar proyectos Behance:', err); });
+  }
 })();
 </script>
 
-	</body>
-
+</body>
 </html>
-
-
-
-
-
-
-
-
